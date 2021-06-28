@@ -19,6 +19,8 @@
   },
   "homepage": "https://github.com/khairatunhissan/Lab2_180042103#readme",
   "dependencies": {
+    "alert": "^5.0.10",
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
