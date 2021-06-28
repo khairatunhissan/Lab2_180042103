@@ -38,8 +38,8 @@ const postRegisterPage =async(req,res)=>{
             res.redirect('/register')
         }
         else{
-            const salt=await bycrypt.genSaltSync(10)
-            const passwordHash=await bycrypt.hash(password,salt)
+            const salt=await bcrypt.genSaltSync(10)
+            const passwordHash=await bcrypt.hash(password,salt)
             const createUser=new User({
                 name,
                 email,
@@ -61,7 +61,7 @@ const postRegisterPage =async(req,res)=>{
 
 }
 
-const postLogin = async (req, res) => {
+/*const postLogin = async (req, res) => {
     const email = req.body.email;
     const pass = req.body.pass;
     const existingUser = await User.findOne({ email });
@@ -80,11 +80,11 @@ const postLogin = async (req, res) => {
       alert("You are not registered\nPlease create an account");
       res.redirect("/register");
     }
-  };
+  };*/
 
 module.exports ={
     getLoginPage,
     getRegisterPage,
     postRegisterPage,
-    postLogin
+    /*postLogin*/
 };
