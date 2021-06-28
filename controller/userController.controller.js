@@ -14,7 +14,23 @@ const postRegisterPage =(req,res)=>{
     const password=req.body.password
     const retype=req.body.retype
 
-    if(password.length<6||!name||!email){
+    try{
+        const user=User.findOne({email:email})
+        if(user){
+            alert("There is already an account under this user")
+            res.redirect('./login')
+        }
+        else if(password.length<=6){
+            alert('Password must contain 6 characters')
+            res.redirect('./register')
+        }
+
+    }
+    catch(error){
+
+    }
+
+    if(password.length<=6||!name||!email){
         return res.json({message:'Registration Failed'})
     }
     res.json({message:'Registration Succesfull'})
