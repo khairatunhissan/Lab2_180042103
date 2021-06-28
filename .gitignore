@@ -1,3 +1,7 @@
-node_modules
-.env
-plugins
+/node_modules
+/views/dist
+/views/pages
+/views/docs
+/views/plugins
+/public/dist
+/public/public

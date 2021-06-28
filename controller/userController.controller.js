@@ -1,5 +1,8 @@
 const User=require('../models/userModel')
 const bcrypt=require('bcryptjs')
+/*const LocalStorage = require("node-localstorage").LocalStorage;*/
+/*localStorage = new LocalStorage("./scratch");*/
+
 const alert= require('alert')
 
 const  getLoginPage =(req,res) => {
@@ -58,8 +61,30 @@ const postRegisterPage =async(req,res)=>{
 
 }
 
+const postLogin = async (req, res) => {
+    const email = req.body.email;
+    const pass = req.body.pass;
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      const passMatch = await bcrypt.compare(password, existingUser.passwordHash);
+      if (passMatch) {
+        localStorage.setItem("name", existingUser.name);
+        // res.cookie("fullname", existingUser.name);
+  
+        res.redirect("/dashboard");
+      } else {
+        alert("Wrong Password");
+        res.redirect("/login");
+      }
+    } else {
+      alert("You are not registered\nPlease create an account");
+      res.redirect("/register");
+    }
+  };
+
 module.exports ={
     getLoginPage,
     getRegisterPage,
-    postRegisterPage
+    postRegisterPage,
+    postLogin
 };
